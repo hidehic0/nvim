@@ -5,10 +5,27 @@ return {
     config = function()
       -- lspのセットアップ
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      require("lspconfig")["lua_ls"].setup({
+      local lspconfig = require("lspconfig")
+      lspconfig["lua_ls"].setup({
         capabilities = capabilities,
       })
-      require("lspconfig")["pyright"].setup({
+      lspconfig["pyright"].setup({
+        capabilities = capabilities,
+        settings = {
+          python = {
+            analysis = {
+              useLibraryCodeForTypes = true, -- ライブラリから型情報を取得する設定
+              autoImportCompletions = false, -- 自動でのimport補完を無効化
+              diagnosticMode = "openFilesOnly", -- 開いているファイルのみをチェック対象に
+            },
+          },
+        },
+      })
+      lspconfig["bashls"].setup({
+        capabilities = capabilities,
+        filetypes = { "sh", "bash", "zsh" }, -- シェルスクリプト用のファイルタイプを指定
+      })
+      lspconfig.clangd.setup({
         capabilities = capabilities,
       })
     end,
@@ -53,37 +70,6 @@ return {
       { "hrsh7th/cmp-cmdline" },
       { "L3MON4D3/LuaSnip" }, -- スニペットのサポート
     },
-  },
-
-  {
-    "nvimtools/none-ls.nvim",
-    config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.black,
-        },
-      })
-      -- luaのfomat on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.lua",
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-
-      -- pythonのformat on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.py",
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-    end,
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "nvim-lua/plenary.nvim" },
   },
 
   {

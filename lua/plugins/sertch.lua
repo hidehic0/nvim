@@ -19,6 +19,7 @@ return {
     cmd = { "Telescope" },
     keys = {
       { "<leader>ff", ":Telescope find_files<CR>" },
+      { "<leader>fg", ":Telescope live_grep<CR>" },
     },
   },
 }

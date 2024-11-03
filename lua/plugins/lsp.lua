@@ -17,6 +17,7 @@ return {
               useLibraryCodeForTypes = true, -- ライブラリから型情報を取得する設定
               autoImportCompletions = false, -- 自動でのimport補完を無効化
               diagnosticMode = "openFilesOnly", -- 開いているファイルのみをチェック対象に
+              pythonPath = "pypy3",
             },
           },
         },

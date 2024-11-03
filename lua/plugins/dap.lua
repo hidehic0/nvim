@@ -55,7 +55,7 @@ return {
     "mfussenegger/nvim-dap-python",
     ft = "python",
     config = function()
-      require("dap-python").setup("python3") -- debugpyのパスを指定
+      require("dap-python").setup("pypy3") -- debugpyのパスを指定
     end,
   },
 }

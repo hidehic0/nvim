@@ -1,3 +1,4 @@
+local mason_path = "/home/hidehico/.local/share/nvim/mason/bin/clangd"
 return {
   {
     "neovim/nvim-lspconfig",
@@ -26,7 +27,15 @@ return {
         capabilities = capabilities,
         filetypes = { "sh", "bash", "zsh" }, -- シェルスクリプト用のファイルタイプを指定
       })
-      lspconfig.clangd.setup({
+      lspconfig["clangd"].setup({
+        cmd = { mason_path },
+        capabilities = capabilities,
+      })
+
+      lspconfig.marksman.setup({
+        on_attach = function(client, bufnr)
+          -- 必要に応じてキーマッピングを設定します
+        end,
         capabilities = capabilities,
       })
     end,

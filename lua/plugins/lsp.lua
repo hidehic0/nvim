@@ -10,9 +10,15 @@ return {
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
       })
+
       lspconfig["pyright"].setup({
         capabilities = capabilities,
         settings = {
+
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
           python = {
             analysis = {
               useLibraryCodeForTypes = true, -- ライブラリから型情報を取得する設定
@@ -23,6 +29,7 @@ return {
           },
         },
       })
+      lspconfig["ruff"].setup({})
       lspconfig["bashls"].setup({
         capabilities = capabilities,
         filetypes = { "sh", "bash", "zsh" }, -- シェルスクリプト用のファイルタイプを指定

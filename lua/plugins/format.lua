@@ -1,49 +1,35 @@
 return {
   {
     "nvimtools/none-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local null_ls = require("null-ls")
+
+      -- 自動フォーマット用のオートグループを作成
+      local autogroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
       null_ls.setup({
         sources = {
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.clang_format,
+          null_ls.builtins.diagnostics.ruff,
           null_ls.builtins.formatting.ruff,
         },
-      })
-
-      -- Luaのformat on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.lua",
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-
-      -- Pythonのformat on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.py",
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-
-      -- シェルスクリプトのformat on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.sh", "*.zsh" },
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-      })
-      -- c++のformat on save
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.cpp", "*.cc", "*.cxx" },
-        callback = function()
-          vim.lsp.buf.format({ async = false })
+        on_attach = function(client, bufnr)
+          if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = autogroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              group = autogroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+              end,
+            })
+          end
         end,
       })
     end,
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "nvim-lua/plenary.nvim" },
   },
 }

@@ -42,6 +42,10 @@ return {
         end,
         capabilities = capabilities,
       })
+      lspconfig.ts_ls.setup({
+        on_attach = function(client, bufnr) end,
+        capabilities = capabilities,
+      })
     end,
     dependencies = {
       {

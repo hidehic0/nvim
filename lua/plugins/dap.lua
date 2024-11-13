@@ -22,6 +22,9 @@ return {
         dap.toggle_breakpoint()
       end, { desc = "Toggle Breakpoint" })
     end,
+    dependencies = {
+      { "nvim-neotest/nvim-nio" },
+    },
   },
   {
     "rcarriga/nvim-dap-ui",

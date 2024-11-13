@@ -32,7 +32,6 @@ return {
         filetypes = { "sh", "bash", "zsh" }, -- シェルスクリプト用のファイルタイプを指定
       })
       lspconfig["clangd"].setup({
-        cmd = { mason_path },
         capabilities = capabilities,
       })
 

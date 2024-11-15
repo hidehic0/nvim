@@ -93,6 +93,7 @@ return {
     event = "InsertEnter",
     config = true,
   },
+
   {
     "nvimdev/lspsaga.nvim",
     config = function()
@@ -102,6 +103,6 @@ return {
       "nvim-treesitter/nvim-treesitter", -- optional
       "nvim-tree/nvim-web-devicons",     -- optional
     },
-    lazy = false,
+    event = "VimEnter",
   },
 }

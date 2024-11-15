@@ -18,4 +18,8 @@ return {
       })
     end,
   },
+  {
+    "vim-denops/denops.vim",
+    event = "VeryLazy",
+  },
 }

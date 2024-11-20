@@ -28,4 +28,8 @@ local opts = {
   },
 }
 
-require("lazy").setup("plugins", opts)
+require("lazy").setup({
+  { import = "plugins.lsp" },
+  { import = "plugins.utils" },
+  { import = "plugins.ui" },
+}, opts)

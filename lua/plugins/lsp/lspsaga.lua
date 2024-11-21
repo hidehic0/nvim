@@ -2,6 +2,7 @@ return {
   {
     "nvimdev/lspsaga.nvim",
     config = function()
+      vim.opt.signcolumn = "yes"
       require("lspsaga").setup({
         diagnostic = {
           -- 診断サインを無効にする

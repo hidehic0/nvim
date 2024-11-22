@@ -10,10 +10,8 @@ return {
     },
     event = "InsertEnter",
     config = function()
-      vim.fn["ddc#custom#patch_global"]("ui", "native")
-
+      vim.fn["ddc#custom#patch_global"]("ui", { "native" })
       vim.fn["ddc#custom#patch_global"]("sources", { "lsp" })
-
       vim.fn["ddc#custom#patch_global"]("sourceOptions", {
         _ = {
           matchers = { "matcher_fuzzy" },
@@ -21,11 +19,18 @@ return {
           converters = { "converter_fuzzy" },
         },
         lsp = {
-          mark = "lsp",
+          mark = "[LSP]",
           forceCompletionPattern = "\\.\\w*|:\\w*|->\\w*",
         },
       })
+      vim.cmd([[
+inoremap <expr> <TAB>
+	\ pumvisible() ? '<C-n>' :
+	\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+	\ '<TAB>' : ddc#map#manual_complete()
 
+	inoremap <expr> <S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+      ]])
       vim.fn["ddc#enable"]()
     end,
   },

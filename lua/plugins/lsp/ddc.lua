@@ -5,20 +5,24 @@ return {
       "vim-denops/denops.vim",
       "Shougo/ddc-source-around",
       "Shougo/ddc-ui-native",
-      "Shougo/ddc-source-around",
       "tani/ddc-fuzzy",
+      "Shougo/ddc-source-lsp",
     },
     event = "InsertEnter",
     config = function()
       vim.fn["ddc#custom#patch_global"]("ui", "native")
 
-      vim.fn["ddc#custom#patch_global"]("sources", { "around" })
+      vim.fn["ddc#custom#patch_global"]("sources", { "lsp" })
 
       vim.fn["ddc#custom#patch_global"]("sourceOptions", {
         _ = {
           matchers = { "matcher_fuzzy" },
           sorters = { "sorter_fuzzy" },
           converters = { "converter_fuzzy" },
+        },
+        lsp = {
+          mark = "lsp",
+          forceCompletionPattern = "\\.\\w*|:\\w*|->\\w*",
         },
       })
 

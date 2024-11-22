@@ -3,12 +3,16 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "hrsh7th/cmp-cmdline" },
+      { "Shougo/ddc-source-lsp" },
+      { "vim-denops/denops.vim" },
+      { "uga-rosa/ddc-source-lsp-setup" },
     },
     config = function()
       -- lspのセットアップ
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("ddc_source_lsp").make_client_capabilities()
+      require("ddc_source_lsp").make_client_capabilities()
       local lspconfig = require("lspconfig")
+
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
       })

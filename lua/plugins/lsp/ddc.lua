@@ -7,6 +7,8 @@ return {
       "Shougo/ddc-ui-native",
       "tani/ddc-fuzzy",
       "Shougo/ddc-source-lsp",
+      -- "Shougo/ddc-sorter_rank",
+      "Shougo/ddc-converter_remove_overlap",
     },
     event = "InsertEnter",
     config = function()
@@ -16,7 +18,7 @@ return {
         _ = {
           matchers = { "matcher_fuzzy" },
           sorters = { "sorter_fuzzy" },
-          converters = { "converter_fuzzy" },
+          converters = { "converter_fuzzy", "converter_remove_overlap" },
         },
         lsp = {
           mark = "[LSP]",

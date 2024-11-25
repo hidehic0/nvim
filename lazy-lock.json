@@ -8,6 +8,7 @@
   "ddc-source-lsp-setup": { "branch": "main", "commit": "a8a06af203d402e0874060bcd8a0b89b32a52224" },
   "ddc-ui-native": { "branch": "main", "commit": "7169980a4beaa672b8e2c5fe38da542e37a16dc1" },
   "ddc.vim": { "branch": "main", "commit": "ec2a8963b3710aaaebc07a513e79eaa9cbb52be6" },
+  "ddu-commands.vim": { "branch": "main", "commit": "2ee7d3d1981d9aecbf75b981472572258c5ebe20" },
   "ddu-filter-converter_devicon": { "branch": "main", "commit": "8bbf0a0457beb8defdd41abe0d6ea2fe877fa96c" },
   "ddu-filter-matcher_substring": { "branch": "main", "commit": "d6defcd1f4a87cc717a72cc620307f9b1e11290d" },
   "ddu-kind-file": { "branch": "main", "commit": "465ca4d8554b51e0cedb83ea97847e08fb8fdf49" },

@@ -19,13 +19,44 @@ return {
             delay = 0,
             name = "preview",
           },
-          floatingBorder = "rounded",
-          previewFloating = true,
-          previewFloatingBorder = "rounded",
-          previewFloatingTitle = "Preview",
-          previewSplit = "horizontal",
-          prompt = "> ",
+
+          winRow = "(&lines - min([70, &lines - 8]) - 3) / 2",
+          previewRow = "(&lines - min([70, &lines - 8]) - 3) / 2",
+
+          winHeight = "min([70, &lines - 8])",
+          previewHeight = "min([70, &lines - 8])",
+
+          winCol = "&columns / 10",
+          previewCol = "&columns / 2",
+
+          winWidth = "&columns * 4 / 10 - 2",
+          previewWidth = "&columns * 4 / 10 - 2",
+          -- <<< sizes
+
+          onPreview = vim.fn["denops#callback#register"](function(args)
+            vim.wo[args.previewWinId].cursorline = false
+          end),
           split = "floating",
+          floatingBorder = "rounded",
+          prompt = "󰈲  ",
+          highlights = {
+            filterText = "dduFilter",
+            floating = "Normal",
+            floatingCursorLine = "dduCursorLine",
+            floatingBorder = "dduBorder",
+            prompt = "dduPrompt",
+          },
+          previewFloating = true,
+          previewFloatingBorder = "single",
+          previewSplit = "vertical",
+          previewWindowOptions = {
+            { "&signcolumn", "no" },
+            { "&foldcolumn", 0 },
+            { "&foldenable", 0 },
+            { "&number",     0 },
+            { "&wrap",       0 },
+            { "&scrolloff",  0 },
+          },
         },
       },
     })
@@ -58,7 +89,6 @@ return {
         vim.keymap.set({ "n" }, "q", [[<Cmd>call ddu#ui#do_action("quit")<CR>]], opts)
         vim.keymap.set({ "n" }, "<Cr>", [[<Cmd>call ddu#ui#do_action("itemAction")<CR>]], opts)
         vim.keymap.set({ "n" }, "i", [[<Cmd>call ddu#ui#do_action("openFilterWindow")<CR>]], opts)
-        vim.keymap.set({ "n" }, "P", [[<Cmd>call ddu#ui#do_action("togglePreview")<CR>]], opts)
       end,
     })
   end,

@@ -9,6 +9,7 @@ return {
     "uga-rosa/ddu-filter-converter_devicon",
     "shun/ddu-source-rg",
     "Shougo/ddu-commands.vim",
+    "uga-rosa/ddu-source-lsp",
   },
 
   config = function()
@@ -55,9 +56,9 @@ return {
             { "&signcolumn", "no" },
             { "&foldcolumn", 0 },
             { "&foldenable", 0 },
-            { "&number",     0 },
-            { "&wrap",       0 },
-            { "&scrolloff",  0 },
+            { "&number", 0 },
+            { "&wrap", 0 },
+            { "&scrolloff", 0 },
           },
         },
       },
@@ -77,11 +78,16 @@ return {
         file_rec = {
           defaultAction = "open",
         },
+        lsp_codeAction = {},
       },
       sourceParams = {
         rg = {
           args = { "--ignore-case", "--column", "--no-heading", "--color", "never" },
         },
+      },
+      kindOptions = {
+        lsp = { defaultAction = "open" },
+        lsp_codeAction = { defaultAction = "apply" },
       },
     })
 
@@ -95,6 +101,7 @@ return {
       end,
     })
   end,
+
   keys = {
     { "<leader>ff", "<Cmd>Ddu file_rec<CR>" },
     { "<leader>fg", "<Cmd>DduRg<CR>" },

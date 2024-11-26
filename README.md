@@ -1,4 +1,4 @@
-# nvim/
+# hidehico's neovim config
 
 <a href="https://dotfyle.com/hidehic0/nvim"><img src="https://dotfyle.com/hidehic0/nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/hidehic0/nvim"><img src="https://dotfyle.com/hidehic0/nvim/badges/leaderkey?style=flat" /></a>

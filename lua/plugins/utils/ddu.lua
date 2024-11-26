@@ -7,6 +7,8 @@ return {
     "Shougo/ddu-ui-ff",
     "Shougo/ddu-kind-file",
     "uga-rosa/ddu-filter-converter_devicon",
+    "shun/ddu-source-rg",
+    "Shougo/ddu-commands.vim",
   },
 
   config = function()
@@ -59,25 +61,26 @@ return {
           },
         },
       },
-    })
-    vim.fn["ddu#custom#patch_local"]("file_recursive", {
-      sources = {
-        {
-          name = { "file_rec" },
-          options = {
-            matchers = {
-              "matcher_substring",
-            },
-            converters = {
-              "converter_devicon",
-            },
-            ignoreCase = true,
+      sourceOptions = {
+        _ = {
+          matchers = {
+            "matcher_substring",
           },
+          converters = {
+            "converter_devicon",
+          },
+          ignoreCase = true,
+        },
+        rg = {
+          defaultAction = "open",
+        },
+        file_rec = {
+          defaultAction = "open",
         },
       },
-      kindOptions = {
-        file = {
-          defaultAction = "open",
+      sourceParams = {
+        rg = {
+          args = { "--ignore-case", "--column", "--no-heading", "--color", "never" },
         },
       },
     })
@@ -92,6 +95,9 @@ return {
       end,
     })
   end,
-  keys = { { "<leader>ff", "<Cmd>call ddu#start(#{name:'file_recursive'})<CR>" } },
+  keys = {
+    { "<leader>ff", "<Cmd>Ddu file_rec<CR>" },
+    { "<leader>fg", "<Cmd>DduRg<CR>" },
+  },
   event = "VeryLazy",
 }

@@ -22,6 +22,8 @@ NVIM_APPNAME=hidehic0/nvim/ nvim
 ```
 
 ## Plugins
+This was created by dotfyle's auto-generation
+Some plugins are missing
 
 ### colorscheme
 

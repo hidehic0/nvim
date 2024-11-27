@@ -12,17 +12,26 @@ return {
     },
     event = "InsertEnter",
     config = function()
-      vim.fn["ddc#custom#patch_global"]("ui", { "native" })
-      vim.fn["ddc#custom#patch_global"]("sources", { "lsp" })
-      vim.fn["ddc#custom#patch_global"]("sourceOptions", {
+      local patch_global = vim.fn["ddc#custom#patch_global"]
+      patch_global("ui", { "native" })
+      patch_global("autoCompleteEvents", {
+        "InsertEnter",
+        "TextChangedI",
+        "TextChangedP",
+        "CmdlineChanged",
+      })
+      patch_global("sources", { "lsp" })
+      patch_global("sourceOptions", {
         _ = {
           matchers = { "matcher_fuzzy" },
           sorters = { "sorter_fuzzy" },
           converters = { "converter_fuzzy", "converter_remove_overlap" },
         },
         lsp = {
-          mark = "[LSP]",
+          mark = "lsp",
+          dup = "keep",
           forceCompletionPattern = "\\.\\w*|:\\w*|->\\w*",
+          sorters = { "sorter_lsp-kind", "sorter_fuzzy" },
         },
       })
       vim.cmd([[

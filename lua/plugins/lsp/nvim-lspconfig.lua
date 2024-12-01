@@ -16,6 +16,9 @@ return {
       lspconfig["lua_ls"].setup({
         capabilities = capabilities,
       })
+      -- lspconfig["rust-analyzer"].setup({
+      --   capabilities = capabilities,
+      -- })
 
       lspconfig["pyright"].setup({
         capabilities = capabilities,
@@ -39,16 +42,13 @@ return {
       })
       lspconfig["clangd"].setup({
         capabilities = capabilities,
+        cmd = { "clangd", "--completion-style=detailed", "--header-insertion=never" },
       })
 
       lspconfig["marksman"].setup({
-        on_attach = function(client, bufnr)
-          -- 必要に応じてキーマッピングを設定します
-        end,
         capabilities = capabilities,
       })
       lspconfig.ts_ls.setup({
-        on_attach = function(client, bufnr) end,
         capabilities = capabilities,
       })
     end,
